@@ -54,20 +54,10 @@ function startQuiz(){
     setTime();
     nextQuestion();
 
-    //for loop attempting to delay each iteration of loop (and failing)
-    // for(i; i<questions.length; i++){
-    //     if(i < howmanytimes){
-    //         setTimeout(startQuiz, 3000);
-    //     }
-    //     console.log(questions[i].title);
-        
-        // f();
-        // createQuestion();
-    // }
+    
 }
 
 function nextQuestion(){
-    start.removeEventListener("click", startQuiz);
     mainCard.textContent =" ";
     mainBody.textContent =" ";
     mainCard.textContent = currentQuestion;
@@ -91,23 +81,11 @@ function nextQuestion(){
     newBtn4.setAttribute("class", "btn btn-primary btn-sm");
     mainBody.appendChild(newBtn4);
     newBtn4.textContent = currentAnswers[3];
-    start.textContent = "Next";
     i++;   
+    start.remove();
 }
 
-start.addEventListener("click", nextQuestion);
 
-//test function to see if/how I can display questions, and potentially add a delay in the for loop
-// function f() {
-//     console.log("hi");
-//     let question = document.createElement("h4");
-//     // questionText = (question.textContent = questions[i]);
-//     mainCard.appendChild(question);
-//     i++;
-//     if(i < howmanytimes){
-//         setTimeout(f, 3000);
-//     }
-// }
 
 // function createQuestion(){
 //     let question = document.createElement("h4");
