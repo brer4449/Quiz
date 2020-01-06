@@ -1,0 +1,23 @@
+/* #highscores{
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  display: inline;
+  z-index: 2;
+} */
+
+/* #timer{
+  position:absolute;
+  top: 5px;
+  right: 35px;
+  display: inline;
+  z-index: 2;
+} */
+
+.container{
+  padding-top: 30px;
+}
+
+.card{
+  text-align: center;
+}
