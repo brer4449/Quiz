@@ -100,9 +100,10 @@ function displayQuestion(){
     currentChoices.textContent = " ";
     questions[index].choices.forEach(function(choice, i){
         let newBtn = document.createElement("button");
-        newBtn.setAttribute("class", "choice");
+        newBtn.setAttribute("class", "choice btn btn-primary");
+        newBtn.setAttribute("style", "margin-right: 5px")
         newBtn.setAttribute("value", choice);
-        newBtn.textContent = i + 1 + choice;
+        newBtn.textContent = `${i + 1}. ${choice}`;
         mainBody.appendChild(newBtn);
     })
     console.log(questions[index].choices);
