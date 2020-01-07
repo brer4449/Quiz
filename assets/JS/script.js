@@ -31,7 +31,8 @@ let scorelist = document.getElementById("scorelist")
 addBtn.addEventListener("click", logScore);
 
 function logScore(){
-    // scorelist.textContent = scoreInput.value;
+    
+    scorelist.textContent = scoreInput.value;
     let pTag = document.createElement("p");
     pTag.innerHTML = "hello";
     scorelist.appendChild(pTag);
