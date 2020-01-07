@@ -11,6 +11,7 @@
 
 let mainCard = document.getElementById("card1");
 let mainBody = document.getElementById("cardtext");
+//Variable that references timer
 let timer = document.getElementById("timer");
 //Variable that references start button
 let start = document.getElementById("btn1");
@@ -20,19 +21,24 @@ let highscores = document.getElementById("highscores");
 let card2 = document.getElementById("card2");
 //Variable storing current score:
 let currentScore = document.getElementById("currentscore");
-// let scoreInput = document.getElementById("scoreinput");
-// let addBtn = document.getElementById("add");
-// let scorelist = document.getElementById("scorelist")
+//Where scores are entered (input tag)
+let scoreInput = document.getElementById("scoreinput");
+//Add button for adding scores
+let addBtn = document.getElementById("add");
+//Empty p tag where scores are going to be stored
+let scorelist = document.getElementById("scorelist")
 
-// addBtn.addEventListener("click", logScore);
+addBtn.addEventListener("click", logScore);
 
-// function logScore(e){
-//     e.preventDefault();
-//     scorelist.textContent = scoreInput.value;
-// }
-// console.log(scoreInput);
+function logScore(){
+    scorelist.textContent = scoreInput.value;
+}
+
+// console.log(scorelist.innerHTML);
 // console.log(scorelist);
 
+//Score value that will increase as questions are answered
+let score = 0;
 //How much time is left
 let secondsLeft = 75;
 //Globally initializing this variable for the questions later on
@@ -44,7 +50,7 @@ let currentQuestion = questions[index].title;
 let currentChoices = [questions[index].choices[0], questions[index].choices[1], questions[index].choices[2], questions[index].choices[3]]
 //Variable declaring correct answer at position index
 let currentAnswer = questions[index].answer;
-console.log(currentChoices[0]);
+// console.log(currentChoices[0]);
 
 //Sets the timer (inside of the start button click event)
 function setTime(){
