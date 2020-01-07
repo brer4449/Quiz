@@ -4,8 +4,9 @@
     //Create timer function✓
 //Create intro page✓
 //Create function to start quiz✓
-//Create function to run through questions
-//Create function to subtract 10 seconds for wrong answers✓
+//Create function to display questions✓
+//Create function to define questions as correct or not
+//Create function to subtract 10 seconds for wrong answers
 //Create function to add points
 
 let mainCard = document.getElementById("card1");
@@ -17,16 +18,33 @@ let start = document.getElementById("btn1");
 let highscores = document.getElementById("highscores");
 //Variable that references the div that contains the scores
 let card2 = document.getElementById("card2");
+//Variable storing current score:
+let currentScore = document.getElementById("currentscore");
+// let scoreInput = document.getElementById("scoreinput");
+// let addBtn = document.getElementById("add");
+// let scorelist = document.getElementById("scorelist")
+
+// addBtn.addEventListener("click", logScore);
+
+// function logScore(e){
+//     e.preventDefault();
+//     scorelist.textContent = scoreInput.value;
+// }
+// console.log(scoreInput);
+// console.log(scorelist);
+
 //How much time is left
 let secondsLeft = 75;
 //Globally initializing this variable for the questions later on
-let wrong;
-let i = 0;
-let howmanytimes = 7;
-//Variable declaring each question at position i
-let currentQuestion = questions[i].title;
+// let wrong;
+let index = 0;
+//Variable declaring each question at position index
+let currentQuestion = questions[index].title;
 //Array with all the choices keys (answers)
-let currentAnswers = [questions[i].choices[0], questions[i].choices[1], questions[i].choices[2], questions[i].choices[3]]
+let currentChoices = [questions[index].choices[0], questions[index].choices[1], questions[index].choices[2], questions[index].choices[3]]
+//Variable declaring correct answer at position index
+let currentAnswer = questions[index].answer;
+console.log(currentChoices[0]);
 
 //Sets the timer (inside of the start button click event)
 function setTime(){
@@ -40,11 +58,12 @@ function setTime(){
     }, 1000)
 }
 
+
 //Displays GAME OVER image when time runs out, erases whatever is on the page
 function sendMessage() {
-    mainCard.textContent=" ";
+    setBlank();
     let img = document.createElement("img");
-    mainCard.appendChild(img)
+    mainCard.appendChild(img);
     img.setAttribute("src", "assets/images/gameover.jpg");
 }
 
@@ -54,39 +73,50 @@ start.addEventListener("click", startQuiz);
 //function that gets the ball rolling
 function startQuiz(){
     setTime();
-    nextQuestion();
+    displayQuestion();
 }
 
-function nextQuestion(){
-    mainCard.textContent =" ";
-    mainBody.textContent =" ";
+function setBlank(){
+    mainCard.textContent=" ";
+    mainBody.textContent=" ";
+}
+
+function displayQuestion(){
+    setBlank();
     mainCard.textContent = currentQuestion;
     let newBtn1 = document.createElement("button");
+    // newBtn1.setAttributes(newBtn1, {"class": "btn btn-primary btn-sm", "style": "margin-right: 5px"})
+    // newBtn1.setAttribute("style", "margin-right: 5px");
     newBtn1.setAttribute("class", "btn btn-primary btn-sm");
-    newBtn1.setAttribute("style", "margin-right: 5px");    
+    newBtn1.setAttribute("style", "margin-right: 5px");
+    console.log(newBtn1);
     mainBody.appendChild(newBtn1);
-    newBtn1.textContent = currentAnswers[0];
+    newBtn1.textContent = currentChoices[0];
     let newBtn2 = document.createElement("button");
     newBtn2.setAttribute("class", "btn btn-primary btn-sm");
     newBtn2.setAttribute("style", "margin-right: 5px");
     mainBody.appendChild(newBtn2);
-    newBtn2.textContent = currentAnswers[1];
+    newBtn2.addEventListener("click", displayQuestion);
+    newBtn2.textContent = currentChoices[1];
     let newBtn3 = document.createElement("button");
     newBtn3.setAttribute("class", "btn btn-primary btn-sm");
     newBtn3.setAttribute("style", "margin-right: 5px");
     mainBody.appendChild(newBtn3);
-    newBtn3.textContent = currentAnswers[2];
+    newBtn3.addEventListener("click", displayQuestion);
+    newBtn3.textContent = currentChoices[2];
     let newBtn4 = document.createElement("button");
     newBtn4.setAttribute("class", "btn btn-primary btn-sm");
     mainBody.appendChild(newBtn4);
-    newBtn4.textContent = currentAnswers[3];
-    i++;
+    newBtn4.textContent = currentChoices[3];
+    index++;
     start.remove();
+    // if(currentChoices[0] === currentAnswer){
+
+    // }
 }
 
+
 function wrongAnswer(){
-    if(wrong === true){
-        secondsLeft - 10
-    }
-    nextQuestion();
+    secondsLeft - 10
+    displayQuestion();
 };
