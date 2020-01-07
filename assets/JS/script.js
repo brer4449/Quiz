@@ -31,11 +31,17 @@ let scorelist = document.getElementById("scorelist")
 addBtn.addEventListener("click", logScore);
 
 function logScore(){
-    scorelist.textContent = scoreInput.value;
+    // scorelist.textContent = scoreInput.value;
+    let pTag = document.createElement("p");
+    pTag.innerHTML = "hello";
+    scorelist.appendChild(pTag);
+
+
+    // scorelist.appendChild(scoreInput.value);
 }
 
-// console.log(scorelist.innerHTML);
-// console.log(scorelist);
+console.log(scorelist);
+// console.log(scoreInput);
 
 //Score value that will increase as questions are answered
 let score = 0;
