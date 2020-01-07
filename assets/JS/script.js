@@ -1,14 +1,12 @@
-//Create div that will show highscore✓
-    //Use local storage to keep scores in window local storage
-//Create div that will show timer✓
-    //Create timer function✓
-//Create intro page✓
-//Create function to start quiz✓
-//Create function to display questions✓
-//Create function to define questions as correct or not
-//Create function to subtract 10 seconds for wrong answers
-//Create function to add points
+//PROBLEMS:
+//Now no buttons (for each to create them wasn't working)
+//No button or function to go to next set of questions
+//No local storage (going to work on it)
+//No keeping track of score function
 
+//Things for me to do:
+//How to hide and show elements in JS
+//
 let mainCard = document.getElementById("card1");
 let mainBody = document.getElementById("cardtext");
 //Variable that references timer
@@ -49,12 +47,11 @@ let score = 0;
 //How much time is left
 let secondsLeft = 75;
 //Globally initializing this variable for the questions later on
-// let wrong;
 let index = 0;
-//Variable declaring each question at position index
-let currentQuestion = questions[index].title;
+
 //Array with all the choices keys (answers)
-let currentChoices = [questions[index].choices[0], questions[index].choices[1], questions[index].choices[2], questions[index].choices[3]]
+let currentChoices = "";
+// [questions[index].choices[0], questions[index].choices[1], questions[index].choices[2], questions[index].choices[3]]
 //Variable declaring correct answer at position index
 let currentAnswer = questions[index].answer;
 // console.log(currentChoices[0]);
@@ -96,37 +93,54 @@ function setBlank(){
 
 function displayQuestion(){
     setBlank();
+    //Variable declaring each question at position index
+    let currentQuestion = questions[index].title;
+    console.log(currentQuestion)
     mainCard.textContent = currentQuestion;
-    let newBtn1 = document.createElement("button");
+    currentChoices.textContent = " ";
+    questions.choices.forEach(function(choice, i){
+        let newBtn = document.createElement("button");
+        newBtn.setAttribute("class", "choice");
+        newBtn.setAttribute("value", choice);
+        newBtn.textContent = i + 1 + choice;
+    })
+    console.log(questions);
+    start.remove();
+
+}
+    
+    
     // newBtn1.setAttributes(newBtn1, {"class": "btn btn-primary btn-sm", "style": "margin-right: 5px"})
     // newBtn1.setAttribute("style", "margin-right: 5px");
-    newBtn1.setAttribute("class", "btn btn-primary btn-sm");
-    newBtn1.setAttribute("style", "margin-right: 5px");
-    console.log(newBtn1);
-    mainBody.appendChild(newBtn1);
-    newBtn1.textContent = currentChoices[0];
-    let newBtn2 = document.createElement("button");
-    newBtn2.setAttribute("class", "btn btn-primary btn-sm");
-    newBtn2.setAttribute("style", "margin-right: 5px");
-    mainBody.appendChild(newBtn2);
-    newBtn2.addEventListener("click", displayQuestion);
-    newBtn2.textContent = currentChoices[1];
-    let newBtn3 = document.createElement("button");
-    newBtn3.setAttribute("class", "btn btn-primary btn-sm");
-    newBtn3.setAttribute("style", "margin-right: 5px");
-    mainBody.appendChild(newBtn3);
-    newBtn3.addEventListener("click", displayQuestion);
-    newBtn3.textContent = currentChoices[2];
-    let newBtn4 = document.createElement("button");
-    newBtn4.setAttribute("class", "btn btn-primary btn-sm");
-    mainBody.appendChild(newBtn4);
-    newBtn4.textContent = currentChoices[3];
-    index++;
-    start.remove();
+    // newBtn1.setAttribute("class", "btn btn-primary btn-sm");
+    // newBtn1.setAttribute("style", "margin-right: 5px");
+    // mainBody.appendChild(newBtn1);
+    // newBtn1.textContent = currentChoices[0];
+    // let newBtn2 = document.createElement("button");
+    // newBtn2.setAttribute("class", "btn btn-primary btn-sm");
+    // newBtn2.setAttribute("style", "margin-right: 5px");
+    // mainBody.appendChild(newBtn2);
+    // newBtn2.addEventListener("click", displayQuestion);
+    // newBtn2.textContent = currentChoices[1];
+    // let newBtn3 = document.createElement("button");
+    // newBtn3.setAttribute("class", "btn btn-primary btn-sm");
+    // newBtn3.setAttribute("style", "margin-right: 5px");
+    // mainBody.appendChild(newBtn3);
+    // newBtn3.addEventListener("click", displayQuestion);
+    // newBtn3.textContent = currentChoices[2];
+    // let newBtn4 = document.createElement("button");
+    // newBtn4.setAttribute("class", "btn btn-primary btn-sm");
+    // mainBody.appendChild(newBtn4);
+    // newBtn4.textContent = currentChoices[3];
+    // index++;
+    // start.remove();
+    // for(let i=0; i<questions.length; i++){
+
+    // }
     // if(currentChoices[0] === currentAnswer){
 
     // }
-}
+// }
 
 
 function wrongAnswer(){
