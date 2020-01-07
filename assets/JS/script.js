@@ -98,13 +98,14 @@ function displayQuestion(){
     console.log(currentQuestion)
     mainCard.textContent = currentQuestion;
     currentChoices.textContent = " ";
-    questions.choices.forEach(function(choice, i){
+    questions[index].choices.forEach(function(choice, i){
         let newBtn = document.createElement("button");
         newBtn.setAttribute("class", "choice");
         newBtn.setAttribute("value", choice);
         newBtn.textContent = i + 1 + choice;
+        mainBody.appendChild(newBtn);
     })
-    console.log(questions);
+    console.log(questions[index].choices);
     start.remove();
 
 }
