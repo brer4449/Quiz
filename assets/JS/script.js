@@ -4,9 +4,6 @@
 //No local storage (going to work on it)
 //No keeping track of score function
 
-//Things for me to do:
-//How to hide and show elements in JS
-
 //Title area element
 let mainCard = document.getElementById("card1");
 //p tag area element
@@ -31,25 +28,6 @@ let userName = document.getElementById("username");
 let addBtn = document.getElementById("add");
 //Empty p tag where scores are going to be stored
 let scorelist = document.getElementById("scorelist")
-
-//Add button event listener
-addBtn.addEventListener("click", logScore);
-//Function to connect add button with displaying it in p tag
-function logScore(){
-    let pTag = document.createElement("p");
-    // pTag.innerHTML = userName.value;
-    // scorelist.appendChild(pTag);
-    let scoreboard = [];
-    scoreboard = userName.value;
-    let convertedScoreboard = JSON.stringify(scoreboard);
-    localStorage.setItem("scoreboard_array", convertedScoreboard);
-    // JSON.parse(localStorage.getItem("scoreboard_array"));
-    pTag.innerHTML = JSON.parse(localStorage.getItem("scoreboard_array"));
-    scorelist.appendChild(pTag);
-}
-// readData();
-// writeDaya();
-
 //Score value that will increase as questions are answered
 let score = 0;
 //How much time is left
@@ -91,25 +69,9 @@ function setBlank(){
     mainCard.textContent=" ";
     mainBody.textContent=" ";
     emptyDiv.textContent=" ";
+    //gets rid of start button
+    start.remove();
 }
-//Function that (in theory) keeps track of score
-function updateScore(event){
-    
-    if(event.target.value === questions[index].answer){
-        score += 10;
-        currentScore.textContent = `Score: ${score}`;
-        let correct = document.createElement("p")
-        correct.textContent = "Correct!";
-        emptyDiv.appendChild(correct);
-    } else {
-        score -= 5;
-        currentScore.textContent = `Score: ${score}`;
-        let incorrect = document.createElement("p")
-        incorrect.textContent = "Incorrect, try again!";
-        emptyDiv.appendChild(incorrect);
-        timer.textContent = secondsLeft - 10;
-    }
-};
 //Shows the next question, creates the answer buttons, removes start button
 function displayQuestion(){
     setBlank();
@@ -128,8 +90,6 @@ function displayQuestion(){
         newBtn.addEventListener("click", updateScore);
         mainBody.appendChild(newBtn);
     })
-    //gets rid of start button
-    start.remove();
     //Creation of next button
     let nextBtn = document.createElement("button");
     nextBtn.setAttribute("class", "btn btn-primary")
@@ -144,3 +104,47 @@ function nextQuestion(){
     index++;
     displayQuestion();
 }
+//Add button event listener
+addBtn.addEventListener("click", logScore);
+//Function to connect add button with displaying it in p tag
+function logScore(){
+    let pTag = document.createElement("p");
+    // pTag.innerHTML = userName.value;
+    // scorelist.appendChild(pTag);
+    let scoreboard = " ";
+    scoreboard += userName.value;
+    let convertedScoreboard = JSON.stringify(scoreboard);
+    localStorage.setItem("scoreboard_array", convertedScoreboard);
+    // JSON.parse(localStorage.getItem("scoreboard_array"));
+    pTag.innerHTML = JSON.parse(localStorage.getItem("scoreboard_array"));
+    scorelist.appendChild(pTag);
+}
+// readData();
+// writeDaya();
+//Function that displays highscore screen
+//Event listener that links highscore button to displaying highscore screen
+highscores.addEventListener("click", showScores)
+//Function that reveals hidden scoreboard block of code
+function showScores(){
+    firstcard.setAttribute("class", "hide");
+    card2.setAttribute("class", "show text-center");
+    setBlank();
+}
+//Function that keeps track of score
+function updateScore(event){
+    
+    if(event.target.value === questions[index].answer){
+        score += 10;
+        currentScore.textContent = `Score: ${score}`;
+        let correct = document.createElement("p")
+        correct.textContent = "Correct!";
+        emptyDiv.appendChild(correct);
+    } else {
+        score -= 5;
+        currentScore.textContent = `Score: ${score}`;
+        let incorrect = document.createElement("p")
+        incorrect.textContent = "Incorrect, try again!";
+        emptyDiv.appendChild(incorrect);
+        timer.textContent = secondsLeft - 10;
+    }
+};
