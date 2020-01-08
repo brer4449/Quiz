@@ -2,7 +2,7 @@
 //Now no buttons (for each to create them wasn't working)✓
 //No button or function to go to next set of questions✓
 //No local storage (going to work on it)
-//No keeping track of score function
+//No keeping track of score function✓
 
 //Title area element
 let mainCard = document.getElementById("card1");
@@ -38,6 +38,8 @@ let index = 0;
 let currentChoices = "";
 //Variable declaring correct answer at position index
 let currentAnswer = questions[index].answer;
+//Attempt at setting final score
+finalscore = 10
 
 //Sets the timer (inside of the start button click event)
 function setTime(){
@@ -104,6 +106,8 @@ function nextQuestion(){
     index++;
     displayQuestion();
 }
+
+//Saving only one object: You are over writing the OBJECT each time you save it to local storage. You need to add it to an array, then STRINGIFY the array of objects, save that. Then reverse it when grabbing it back from local storage.
 //Add button event listener
 addBtn.addEventListener("click", logScore);
 //Function to connect add button with displaying it in p tag
@@ -111,8 +115,14 @@ function logScore(){
     let pTag = document.createElement("p");
     // pTag.innerHTML = userName.value;
     // scorelist.appendChild(pTag);
-    let scoreboard = " ";
-    scoreboard += userName.value;
+    let userscore = userName.value;
+    let scoreboard = {
+        finalscore : userscore
+    };
+    let userArrayObject = [
+        
+    ]
+
     let convertedScoreboard = JSON.stringify(scoreboard);
     localStorage.setItem("scoreboard_array", convertedScoreboard);
     // JSON.parse(localStorage.getItem("scoreboard_array"));
@@ -121,10 +131,10 @@ function logScore(){
 }
 // readData();
 // writeDaya();
-//Function that displays highscore screen
+
 //Event listener that links highscore button to displaying highscore screen
 highscores.addEventListener("click", showScores)
-//Function that reveals hidden scoreboard block of code
+//Function that displays highscore screen
 function showScores(){
     firstcard.setAttribute("class", "hide");
     card2.setAttribute("class", "show text-center");
