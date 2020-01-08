@@ -19,8 +19,8 @@ let highscores = document.getElementById("highscores");
 let card2 = document.getElementById("card2");
 //Variable storing current score:
 let currentScore = document.getElementById("currentscore");
-//Where scores are entered (input tag)
-let scoreInput = document.getElementById("scoreinput");
+//Where intials are entered (input tag)
+let userName = document.getElementById("username");
 //Add button for adding scores
 let addBtn = document.getElementById("add");
 //Empty p tag where scores are going to be stored
@@ -28,15 +28,11 @@ let scorelist = document.getElementById("scorelist")
 
 addBtn.addEventListener("click", logScore);
 
-function logScore(){
-    
-    scorelist.textContent = scoreInput.value;
+function logScore(e){
+    e.preventDefault();
     let pTag = document.createElement("p");
-    pTag.innerHTML = "hello";
+    pTag.innerHTML = userName.value;
     scorelist.appendChild(pTag);
-
-
-    // scorelist.appendChild(scoreInput.value);
 }
 
 
