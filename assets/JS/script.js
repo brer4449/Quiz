@@ -6,9 +6,15 @@
 
 //Things for me to do:
 //How to hide and show elements in JS
-//
+
+//Title area element
 let mainCard = document.getElementById("card1");
+//p tag area element
 let mainBody = document.getElementById("cardtext");
+//Empty div area for next button
+let emptyDiv = document.getElementById("emptydiv");
+//Empty div that will indicate if answer is right or wrong
+let rightwrong = document.getElementById("rightwrong");
 //Variable that references timer
 let timer = document.getElementById("timer");
 //Variable that references start button
@@ -29,8 +35,7 @@ let scorelist = document.getElementById("scorelist")
 //Add button event listener
 addBtn.addEventListener("click", logScore);
 //Function to connect add button with displaying it in p tag
-function logScore(e){
-    e.preventDefault();
+function logScore(){
     let pTag = document.createElement("p");
     // pTag.innerHTML = userName.value;
     // scorelist.appendChild(pTag);
@@ -85,18 +90,23 @@ function startQuiz(){
 function setBlank(){
     mainCard.textContent=" ";
     mainBody.textContent=" ";
+    emptyDiv.textContent=" ";
 }
 //Function that (in theory) keeps track of score
-function updateScore(e){
-    e.preventDefault();
-    if(e.target.value === questions[index].answer){
+function updateScore(event){
+    
+    if(event.target.value === questions[index].answer){
         score += 10;
         currentScore.textContent = `Score: ${score}`;
-        alert("Correct!");
+        let correct = document.createElement("p")
+        correct.textContent = "Correct!";
+        emptyDiv.appendChild(correct);
     } else {
         score -= 5;
         currentScore.textContent = `Score: ${score}`;
-        alert("Incorrect, try again!");
+        let incorrect = document.createElement("p")
+        incorrect.textContent = "Incorrect, try again!";
+        emptyDiv.appendChild(incorrect);
         timer.textContent = secondsLeft - 10;
     }
 };
@@ -123,8 +133,9 @@ function displayQuestion(){
     //Creation of next button
     let nextBtn = document.createElement("button");
     nextBtn.setAttribute("class", "btn btn-primary")
+    nextBtn.setAttribute("style", "display: inline-block")
     nextBtn.textContent = "Next";
-    mainBody.appendChild(nextBtn);
+    emptyDiv.appendChild(nextBtn);
     nextBtn.addEventListener("click", nextQuestion);
     updateScore();
 };
