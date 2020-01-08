@@ -1,6 +1,6 @@
 //PROBLEMS:
-//Now no buttons (for each to create them wasn't working)
-//No button or function to go to next set of questions
+//Now no buttons (for each to create them wasn't working)✓
+//No button or function to go to next set of questions✓
 //No local storage (going to work on it)
 //No keeping track of score function
 
@@ -26,8 +26,9 @@ let addBtn = document.getElementById("add");
 //Empty p tag where scores are going to be stored
 let scorelist = document.getElementById("scorelist")
 
+//Add button event listener
 addBtn.addEventListener("click", logScore);
-
+//Function to connect add button with displaying it in p tag
 function logScore(e){
     e.preventDefault();
     let pTag = document.createElement("p");
@@ -35,17 +36,14 @@ function logScore(e){
     scorelist.appendChild(pTag);
 }
 
-
 //Score value that will increase as questions are answered
 let score = 0;
 //How much time is left
 let secondsLeft = 75;
 //Globally initializing this variable for the questions later on
 let index = 0;
-
-//Array with all the choices keys (answers)
+//Empty variable for later, going to have choices from question at position index in here
 let currentChoices = "";
-// [questions[index].choices[0], questions[index].choices[1], questions[index].choices[2], questions[index].choices[3]]
 //Variable declaring correct answer at position index
 let currentAnswer = questions[index].answer;
 
@@ -102,6 +100,7 @@ function displayQuestion(){
             } else {
                 score -= 5;
                 alert("Incorrect, try again!");
+                secondsLeft - 10;
             }
             console.log(questions[index].answer);
         })
@@ -122,39 +121,6 @@ function nextQuestion(){
     index++;
     displayQuestion();
 }
-    
-    
-    // newBtn1.setAttributes(newBtn1, {"class": "btn btn-primary btn-sm", "style": "margin-right: 5px"})
-    // newBtn1.setAttribute("style", "margin-right: 5px");
-    // newBtn1.setAttribute("class", "btn btn-primary btn-sm");
-    // newBtn1.setAttribute("style", "margin-right: 5px");
-    // mainBody.appendChild(newBtn1);
-    // newBtn1.textContent = currentChoices[0];
-    // let newBtn2 = document.createElement("button");
-    // newBtn2.setAttribute("class", "btn btn-primary btn-sm");
-    // newBtn2.setAttribute("style", "margin-right: 5px");
-    // mainBody.appendChild(newBtn2);
-    // newBtn2.addEventListener("click", displayQuestion);
-    // newBtn2.textContent = currentChoices[1];
-    // let newBtn3 = document.createElement("button");
-    // newBtn3.setAttribute("class", "btn btn-primary btn-sm");
-    // newBtn3.setAttribute("style", "margin-right: 5px");
-    // mainBody.appendChild(newBtn3);
-    // newBtn3.addEventListener("click", displayQuestion);
-    // newBtn3.textContent = currentChoices[2];
-    // let newBtn4 = document.createElement("button");
-    // newBtn4.setAttribute("class", "btn btn-primary btn-sm");
-    // mainBody.appendChild(newBtn4);
-    // newBtn4.textContent = currentChoices[3];
-    // index++;
-    // start.remove();
-    // for(let i=0; i<questions.length; i++){
-
-    // }
-    // if(currentChoices[0] === currentAnswer){
-
-    // }
-// }
 
 
 function wrongAnswer(){
