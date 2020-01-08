@@ -32,9 +32,18 @@ addBtn.addEventListener("click", logScore);
 function logScore(e){
     e.preventDefault();
     let pTag = document.createElement("p");
-    pTag.innerHTML = userName.value;
+    // pTag.innerHTML = userName.value;
+    // scorelist.appendChild(pTag);
+    let scoreboard = [];
+    scoreboard = userName.value;
+    let convertedScoreboard = JSON.stringify(scoreboard);
+    localStorage.setItem("scoreboard_array", convertedScoreboard);
+    // JSON.parse(localStorage.getItem("scoreboard_array"));
+    pTag.innerHTML = JSON.parse(localStorage.getItem("scoreboard_array"));
     scorelist.appendChild(pTag);
 }
+
+
 
 //Score value that will increase as questions are answered
 let score = 0;
@@ -94,6 +103,7 @@ function displayQuestion(){
         newBtn.textContent = `${i + 1}. ${choice}`;
         newBtn.addEventListener("click", function(e){
             e.preventDefault();
+            //scores and secondsLeft aren't adding and subtracting as expected
             if(e.target.value === questions[index].answer){
                 score += 10;
                 alert("Correct!");
@@ -102,7 +112,6 @@ function displayQuestion(){
                 alert("Incorrect, try again!");
                 secondsLeft - 10;
             }
-            console.log(questions[index].answer);
         })
         mainBody.appendChild(newBtn);
     })
@@ -121,9 +130,3 @@ function nextQuestion(){
     index++;
     displayQuestion();
 }
-
-
-function wrongAnswer(){
-    secondsLeft - 10
-    displayQuestion();
-};
