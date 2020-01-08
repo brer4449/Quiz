@@ -48,7 +48,6 @@ let currentChoices = "";
 // [questions[index].choices[0], questions[index].choices[1], questions[index].choices[2], questions[index].choices[3]]
 //Variable declaring correct answer at position index
 let currentAnswer = questions[index].answer;
-// console.log(currentChoices[0]);
 
 //Sets the timer (inside of the start button click event)
 function setTime(){
@@ -61,8 +60,6 @@ function setTime(){
             }
     }, 1000)
 }
-
-
 //Displays GAME OVER image when time runs out, erases whatever is on the page
 function sendMessage() {
     setBlank();
@@ -70,45 +67,57 @@ function sendMessage() {
     mainCard.appendChild(img);
     img.setAttribute("src", "assets/images/gameover.jpg");
 }
-
-//Start button
+//Start button event listener
 start.addEventListener("click", startQuiz);
-
 //function that gets the ball rolling
 function startQuiz(){
     setTime();
     displayQuestion();
 }
-
+//Resets the contents of the page
 function setBlank(){
     mainCard.textContent=" ";
     mainBody.textContent=" ";
 }
-
+//Shows the next question, creates the answer buttons, removes start button
 function displayQuestion(){
     setBlank();
     //Variable declaring each question at position index
     let currentQuestion = questions[index].title;
-    console.log(currentQuestion)
+    //Setting the title are to the current question
     mainCard.textContent = currentQuestion;
     currentChoices.textContent = " ";
+    //forEach that creates each button from choices at position index
     questions[index].choices.forEach(function(choice, i){
         let newBtn = document.createElement("button");
         newBtn.setAttribute("class", "choice btn btn-primary btn-sm");
         newBtn.setAttribute("style", "margin-right: 5px")
         newBtn.setAttribute("value", choice);
         newBtn.textContent = `${i + 1}. ${choice}`;
+        newBtn.addEventListener("click", function(e){
+            e.preventDefault();
+            if(e.target.value === questions[index].answer){
+                score += 10;
+                alert("Correct!");
+            } else {
+                score -= 5;
+                alert("Incorrect, try again!");
+            }
+            console.log(questions[index].answer);
+        })
         mainBody.appendChild(newBtn);
     })
+    currentScore = score
+    //gets rid of start button
     start.remove();
+    //Creation of next button
     let nextBtn = document.createElement("button");
     nextBtn.setAttribute("class", "btn btn-primary")
     nextBtn.textContent = "Next";
     mainBody.appendChild(nextBtn);
     nextBtn.addEventListener("click", nextQuestion);
-
-}
-
+};
+//Function that increments index and calls the displayQuestion function to show us the next Q
 function nextQuestion(){
     index++;
     displayQuestion();
