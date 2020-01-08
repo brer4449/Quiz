@@ -39,8 +39,6 @@ function logScore(){
     // scorelist.appendChild(scoreInput.value);
 }
 
-console.log(scorelist);
-// console.log(scoreInput);
 
 //Score value that will increase as questions are answered
 let score = 0;
@@ -100,15 +98,24 @@ function displayQuestion(){
     currentChoices.textContent = " ";
     questions[index].choices.forEach(function(choice, i){
         let newBtn = document.createElement("button");
-        newBtn.setAttribute("class", "choice btn btn-primary");
+        newBtn.setAttribute("class", "choice btn btn-primary btn-sm");
         newBtn.setAttribute("style", "margin-right: 5px")
         newBtn.setAttribute("value", choice);
         newBtn.textContent = `${i + 1}. ${choice}`;
         mainBody.appendChild(newBtn);
     })
-    console.log(questions[index].choices);
     start.remove();
+    let nextBtn = document.createElement("button");
+    nextBtn.setAttribute("class", "btn btn-primary")
+    nextBtn.textContent = "Next";
+    mainBody.appendChild(nextBtn);
+    nextBtn.addEventListener("click", nextQuestion);
 
+}
+
+function nextQuestion(){
+    index++;
+    displayQuestion();
 }
     
     
