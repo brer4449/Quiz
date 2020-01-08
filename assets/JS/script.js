@@ -42,8 +42,8 @@ function logScore(e){
     pTag.innerHTML = JSON.parse(localStorage.getItem("scoreboard_array"));
     scorelist.appendChild(pTag);
 }
-
-
+// readData();
+// writeDaya();
 
 //Score value that will increase as questions are answered
 let score = 0;
@@ -86,6 +86,20 @@ function setBlank(){
     mainCard.textContent=" ";
     mainBody.textContent=" ";
 }
+//Function that (in theory) keeps track of score
+function updateScore(e){
+    e.preventDefault();
+    if(e.target.value === questions[index].answer){
+        score += 10;
+        currentScore.textContent = `Score: ${score}`;
+        alert("Correct!");
+    } else {
+        score -= 5;
+        currentScore.textContent = `Score: ${score}`;
+        alert("Incorrect, try again!");
+        timer.textContent = secondsLeft - 10;
+    }
+};
 //Shows the next question, creates the answer buttons, removes start button
 function displayQuestion(){
     setBlank();
@@ -101,21 +115,9 @@ function displayQuestion(){
         newBtn.setAttribute("style", "margin-right: 5px")
         newBtn.setAttribute("value", choice);
         newBtn.textContent = `${i + 1}. ${choice}`;
-        newBtn.addEventListener("click", function(e){
-            e.preventDefault();
-            //scores and secondsLeft aren't adding and subtracting as expected
-            if(e.target.value === questions[index].answer){
-                score += 10;
-                alert("Correct!");
-            } else {
-                score -= 5;
-                alert("Incorrect, try again!");
-                secondsLeft - 10;
-            }
-        })
+        newBtn.addEventListener("click", updateScore);
         mainBody.appendChild(newBtn);
     })
-    currentScore = score
     //gets rid of start button
     start.remove();
     //Creation of next button
@@ -124,6 +126,7 @@ function displayQuestion(){
     nextBtn.textContent = "Next";
     mainBody.appendChild(nextBtn);
     nextBtn.addEventListener("click", nextQuestion);
+    updateScore();
 };
 //Function that increments index and calls the displayQuestion function to show us the next Q
 function nextQuestion(){
