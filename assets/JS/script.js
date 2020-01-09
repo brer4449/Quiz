@@ -4,10 +4,14 @@
 //No local storage (going to work on it)
 //No keeping track of score function✓
 
+//References the whole card element (mainCard AND mainbody)
+let firstcard = document.getElementById("firstcard")
 //Title area element
 let mainCard = document.getElementById("card1");
 //p tag area element
 let mainBody = document.getElementById("cardtext");
+//Starover button
+let startover = document.getElementById("startover");
 //Empty div area for next button
 let emptyDiv = document.getElementById("emptydiv");
 //Empty div that will indicate if answer is right or wrong
@@ -66,6 +70,11 @@ function startQuiz(){
     setTime();
     displayQuestion();
 }
+//Event listener that fires off when starover button is clicked
+startover.addEventListener("click", startOver);
+//Reloads the page when startover button is clicked
+function startOver(){
+};
 //Resets the contents of the page
 function setBlank(){
     mainCard.textContent=" ";
@@ -73,7 +82,7 @@ function setBlank(){
     emptyDiv.textContent=" ";
     //gets rid of start button
     start.remove();
-}
+};
 //Shows the next question, creates the answer buttons, removes start button
 function displayQuestion(){
     setBlank();
@@ -86,7 +95,7 @@ function displayQuestion(){
     questions[index].choices.forEach(function(choice, i){
         let newBtn = document.createElement("button");
         newBtn.setAttribute("class", "choice btn btn-primary btn-sm");
-        newBtn.setAttribute("style", "margin-right: 5px")
+        newBtn.setAttribute("style", "margin-right: 5px");
         newBtn.setAttribute("value", choice);
         newBtn.textContent = `${i + 1}. ${choice}`;
         newBtn.addEventListener("click", updateScore);
@@ -94,8 +103,8 @@ function displayQuestion(){
     })
     //Creation of next button
     let nextBtn = document.createElement("button");
-    nextBtn.setAttribute("class", "btn btn-primary")
-    nextBtn.setAttribute("style", "display: inline-block")
+    nextBtn.setAttribute("class", "btn btn-primary");
+    nextBtn.setAttribute("style", "display: inline-block");
     nextBtn.textContent = "Next";
     emptyDiv.appendChild(nextBtn);
     nextBtn.addEventListener("click", nextQuestion);
@@ -121,7 +130,7 @@ function logScore(){
     };
     let userArrayObject = [
         
-    ]
+    ];
 
     let convertedScoreboard = JSON.stringify(scoreboard);
     localStorage.setItem("scoreboard_array", convertedScoreboard);
@@ -142,7 +151,7 @@ function showScores(){
 }
 //Function that keeps track of score
 function updateScore(event){
-    
+    event.preventDefault();
     if(event.target.value === questions[index].answer){
         score += 10;
         currentScore.textContent = `Score: ${score}`;
