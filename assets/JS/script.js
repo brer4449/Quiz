@@ -114,8 +114,6 @@ function nextQuestion(){
     index++;
     displayQuestion();
 }
-
-//Saving only one object: You are over writing the OBJECT each time you save it to local storage. You need to add it to an array, then STRINGIFY the array of objects, save that. Then reverse it when grabbing it back from local storage.
 //Add button event listener
 addBtn.addEventListener("click", logScore);
 //Function to connect add button with displaying it in p tag
@@ -154,7 +152,7 @@ function showScores(){
 //Function that keeps track of score
 function updateScore(event){
     event.preventDefault();
-    emptyDiv.innerHTML="";
+    // emptyDiv.textContent="";
     if(event.target.value === questions[index].answer){
         score += 10;
         currentScore.textContent = `Score: ${score}`;
@@ -168,6 +166,5 @@ function updateScore(event){
         incorrect.textContent= " ";
         incorrect.textContent = "Incorrect, try again!";
         emptyDiv.appendChild(incorrect);
-        timer.textContent = secondsLeft - 10;
     }
 };
