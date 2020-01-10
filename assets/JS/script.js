@@ -1,11 +1,5 @@
-//PROBLEMS:
-//Now no buttons (for each to create them wasn't working)✓
-//No button or function to go to next set of questions✓
-//No local storage✓
-//No keeping track of score function✓
-
 //References the whole card element (mainCard AND mainbody)
-let firstcard = document.getElementById("firstcard")
+let firstcard = document.getElementById("firstcard");
 //Title area element
 let mainCard = document.getElementById("card1");
 //p tag area element
@@ -31,7 +25,13 @@ let userName = document.getElementById("username");
 //Add button for adding scores
 let addBtn = document.getElementById("add");
 //Empty p tag where scores are going to be stored
-let scorelist = document.getElementById("scorelist")
+let scorelist = document.getElementById("scorelist");
+//End quiz button
+let finishBtn = document.getElementById("done");
+//Grabs end of game content
+let endofgame = document.getElementById("endofgamecontent");
+//Div that will display score to user when they click end game button
+let displayscore = document.getElementById("displayscore")
 //Score value that will increase as questions are answered
 let score = 0;
 //How much time is left
@@ -44,7 +44,6 @@ let currentChoices = "";
 let currentAnswer = questions[index].answer;
 //Attempt at setting final score
 finalscore = 10
-
 //Sets the timer (inside of the start button click event)
 function setTime(){
     let timerInterval = setInterval(function(){
@@ -136,8 +135,6 @@ function logScore(){
 highscores.addEventListener("click", showScores)
 //Function that displays highscore screen
 function showScores(){
-    //clear function for localstorage goes here
-    // scorelist.empty();
     firstcard.setAttribute("class", "hide");
     card2.setAttribute("class", "show text-center");
     let userNameArray = JSON.parse(localStorage.getItem("scoreboard_array"));
@@ -168,3 +165,12 @@ function updateScore(event){
         emptyDiv.appendChild(incorrect);
     }
 };
+//Button that ends quiz
+finishBtn.addEventListener("click", endContent)
+//Function that reveals end of quiz content
+function endContent(){
+    setBlank();
+    timer.remove();
+    endofgame.setAttribute("class", "show")
+    displayscore.textContent = `Your score: ${score}`;
+}
