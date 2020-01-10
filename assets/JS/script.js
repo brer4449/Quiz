@@ -125,15 +125,17 @@ function logScore(){
     // pTag.innerHTML = userName.value;
     // scorelist.appendChild(pTag);
     let userscore = userName.value;
-    let scoreboard = {
-        finalscore : userscore
-    };
+    let scoreboard = []
+    
+    // finalscore, userscore
     let userArrayObject = [
         
     ];
-
-    let convertedScoreboard = JSON.stringify(scoreboard);
-    localStorage.setItem("scoreboard_array", convertedScoreboard);
+    let userNameArray = JSON.parse(localStorage.getItem("scoreboard_array"));
+    userNameArray.push(userscore);
+    console.log(userNameArray);
+    localStorage.setItem("scoreboard_array", JSON.stringify(userNameArray));
+    
     // JSON.parse(localStorage.getItem("scoreboard_array"));
     pTag.innerHTML = JSON.parse(localStorage.getItem("scoreboard_array"));
     scorelist.appendChild(pTag);
@@ -161,7 +163,8 @@ function updateScore(event){
     } else {
         score -= 5;
         currentScore.textContent = `Score: ${score}`;
-        let incorrect = document.createElement("p")
+        let incorrect = document.createElement("p");
+        incorrect.textContent= " ";
         incorrect.textContent = "Incorrect, try again!";
         emptyDiv.appendChild(incorrect);
         timer.textContent = secondsLeft - 10;
