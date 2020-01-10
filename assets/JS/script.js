@@ -1,7 +1,7 @@
 //PROBLEMS:
 //Now no buttons (for each to create them wasn't working)✓
 //No button or function to go to next set of questions✓
-//No local storage (going to work on it)
+//No local storage✓
 //No keeping track of score function✓
 
 //References the whole card element (mainCard AND mainbody)
@@ -108,7 +108,6 @@ function displayQuestion(){
     nextBtn.textContent = "Next";
     emptyDiv.appendChild(nextBtn);
     nextBtn.addEventListener("click", nextQuestion);
-    updateScore();
 };
 //Function that increments index and calls the displayQuestion function to show us the next Q
 function nextQuestion(){
@@ -122,22 +121,14 @@ addBtn.addEventListener("click", logScore);
 //Function to connect add button with displaying it in p tag
 function logScore(){
     let pTag = document.createElement("p");
-    // pTag.innerHTML = userName.value;
-    // scorelist.appendChild(pTag);
     let userscore = userName.value;
-    let scoreboard = []
-    
-    // finalscore, userscore
-    let userArrayObject = [
-        
-    ];
     let userNameArray = JSON.parse(localStorage.getItem("scoreboard_array"));
     userNameArray.push(userscore);
     console.log(userNameArray);
     localStorage.setItem("scoreboard_array", JSON.stringify(userNameArray));
     
     // JSON.parse(localStorage.getItem("scoreboard_array"));
-    pTag.innerHTML = JSON.parse(localStorage.getItem("scoreboard_array"));
+    pTag.innerHTML = userscore;
     scorelist.appendChild(pTag);
 }
 // readData();
@@ -147,13 +138,23 @@ function logScore(){
 highscores.addEventListener("click", showScores)
 //Function that displays highscore screen
 function showScores(){
+    //clear function for localstorage goes here
+    // scorelist.empty();
     firstcard.setAttribute("class", "hide");
     card2.setAttribute("class", "show text-center");
+    let userNameArray = JSON.parse(localStorage.getItem("scoreboard_array"));
+    for(let i=0; i<userNameArray.length; i++){
+        let pTag = document.createElement("p");
+        pTag.textContent = userNameArray[i];
+        console.log(userNameArray);
+        scorelist.appendChild(pTag);
+    }
     setBlank();
 }
 //Function that keeps track of score
 function updateScore(event){
     event.preventDefault();
+    emptyDiv.innerHTML="";
     if(event.target.value === questions[index].answer){
         score += 10;
         currentScore.textContent = `Score: ${score}`;
