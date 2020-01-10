@@ -117,27 +117,25 @@ function nextQuestion(){
 addBtn.addEventListener("click", logScore);
 //Function to connect add button with displaying it in p tag
 function logScore(){
+    //need to first set localstorage before getting from it
+    //put setItem before .getItem
+    //want to add score array to locally store the scores, and then will eventually display pTag.innerHTML = name + score
     let pTag = document.createElement("p");
-    let userscore = userName.value;
-    let userNameArray = JSON.parse(localStorage.getItem("scoreboard_array"));
-    userNameArray.push(userscore);
-    console.log(userNameArray);
-    localStorage.setItem("scoreboard_array", JSON.stringify(userNameArray));
-    
-    // JSON.parse(localStorage.getItem("scoreboard_array"));
-    pTag.innerHTML = userscore;
+    let name = userName.value;
+    let userNameArray = JSON.parse(localStorage.getItem("username_array"));
+    // let userScoreArray = JSON.parse(localStorage.getItem(""))
+    userNameArray.push(name);
+    localStorage.setItem("username_array", JSON.stringify(userNameArray));
+    pTag.innerHTML = name;
     scorelist.appendChild(pTag);
 }
-// readData();
-// writeDaya();
-
 //Event listener that links highscore button to displaying highscore screen
 highscores.addEventListener("click", showScores)
 //Function that displays highscore screen
 function showScores(){
     firstcard.setAttribute("class", "hide");
     card2.setAttribute("class", "show text-center");
-    let userNameArray = JSON.parse(localStorage.getItem("scoreboard_array"));
+    let userNameArray = JSON.parse(localStorage.getItem("username_array"));
     for(let i=0; i<userNameArray.length; i++){
         let pTag = document.createElement("p");
         pTag.textContent = userNameArray[i];
