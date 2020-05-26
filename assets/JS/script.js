@@ -79,12 +79,12 @@ function nextQuestion(event) {
   event.preventDefault();
   if (event.target.value === questions[index].answer) {
     score += 10;
-    currentScore.textContent = `Score: ${score}`;
+    currentScore.textContent = `Current Score: ${score}`;
     // emptyDiv.textContent = "";
     emptyDiv.textContent = "Correct!";
   } else {
     score -= 5;
-    currentScore.textContent = `Score: ${score}`;
+    currentScore.textContent = `Current Score: ${score}`;
     // emptyDiv.textContent = "";
     emptyDiv.textContent = "Incorrect!";
   }
@@ -132,6 +132,16 @@ finishBtn.addEventListener("click", endContent);
 //Function that reveals end of quiz content
 function endContent() {
   setBlank();
+  if (secondsLeft > 59) {
+    score += 30;
+  } else if (secondsLeft > 44) {
+    score += 20;
+  } else if (secondsLeft > 29) {
+    score += 10;
+  } else {
+    score += 5;
+  }
+  console.log(score);
   clearInterval(timerInterval);
   endofgame.setAttribute("class", "show");
   displayscore.textContent = `Your score: ${score}`;

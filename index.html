@@ -33,7 +33,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a
                 class="nav-link"
                 href="https://brer4449.github.io/homework4API/"
@@ -47,11 +47,15 @@
               <a class="nav-link" href="#" id="done">End Quiz</a>
             </li>
           </ul>
-          <span class="navbar-text" id="currentscore">
-            Score
+          <span
+            class="navbar-text"
+            id="currentscore"
+            style="margin-right: 8px;"
+          >
+            Current Score: 0
           </span>
           <span class="navbar-text" id="timer">
-            Time
+            Time: 75
           </span>
         </div>
       </nav>
@@ -66,7 +70,8 @@
             Try to answer the following code-related questions within the time
             limit. Keep in mind that incorrect answer will penalize your score
             time by 10 seconds! Correct answers are worth 10 points and
-            incorrect answers get penalized 5 points. Good Luck!
+            incorrect answers get penalized 5 points. The faster you finish, the
+            more points you get! Good Luck!
           </p>
           <a href="#" class="btn btn-primary" id="btn1">Click to Start!</a>
           <div id="emptydiv"></div>
@@ -78,6 +83,9 @@
         </div>
         <div class="card-body">
           <p id="displayscore"></p>
+          <p>
+            You received additional points for finishing as quickly as you did!
+          </p>
           <p>If you want to add your score, click the Highscore button</p>
         </div>
       </div>
