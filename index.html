@@ -9,7 +9,7 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="./assets/CSS/styles.css" />
-    <title>Document</title>
+    <title>JS Quiz</title>
   </head>
   <body>
     <div>
@@ -17,7 +17,6 @@
         <a
           class="navbar-brand"
           href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-          target="_blank"
           >Do NOT Click Here</a
         >
         <button
@@ -37,19 +36,31 @@
               <a
                 class="nav-link"
                 href="https://brer4449.github.io/homework4API/"
-                >Start Over <span class="sr-only">(current)</span></a
+                >Start Over</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="highscores">Highscores</a>
+              <span class="disable-links" id="disable-hs"
+                ><a
+                  class="nav-link"
+                  href="#"
+                  id="high-scores"
+                  aria-disabled="true"
+                  >High Scores</a
+                ></span
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="done">End Quiz</a>
+              <span class="disable-links" id="disable-end"
+                ><a class="nav-link" href="#" id="done" aria-disabled="true"
+                  >End Quiz</a
+                ></span
+              >
             </li>
           </ul>
           <span
             class="navbar-text"
-            id="currentscore"
+            id="current-score"
             style="margin-right: 8px;"
           >
             Current Score: 0
@@ -61,12 +72,12 @@
       </nav>
     </div>
     <div class="container">
-      <div class="card" id="firstcard">
+      <div class="card" id="first-card">
         <div class="card-header" id="card1">
           <h1>Coding Quiz Challenge</h1>
         </div>
         <div class="card-body">
-          <p class="card-text" id="cardtext">
+          <p class="card-text" id="card-text">
             Try to answer the following code-related questions within the time
             limit. Keep in mind that incorrect answer will penalize your score
             time by 10 seconds! Correct answers are worth 10 points and
@@ -74,15 +85,15 @@
             more points you get! Good Luck!
           </p>
           <a href="#" class="btn btn-primary" id="btn1">Click to Start!</a>
-          <div id="emptydiv"></div>
+          <div id="empty-div"></div>
         </div>
       </div>
-      <div class="card hide" id="endofgamecontent">
+      <div class="card hide" id="end-of-game-content">
         <div class="card-header">
           <h3>Congratulations! You finished the Quiz!</h3>
         </div>
         <div class="card-body">
-          <p id="displayscore"></p>
+          <p id="display-score"></p>
           <p>
             You received additional points for finishing as quickly as you did!
           </p>
@@ -107,7 +118,7 @@
             </div>
           </div>
         </div>
-        <div class="card-body" id="scorelist">
+        <div class="card-body" id="score-list">
           <p class="card-text"></p>
         </div>
       </div>

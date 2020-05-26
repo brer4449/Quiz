@@ -1,15 +1,19 @@
-.container{
+.container {
   padding-top: 30px;
 }
 
-.card{
+.card {
   text-align: center;
 }
 
-.hide{
+.disable-links {
+  pointer-events: none;
+}
+
+.hide {
   visibility: hidden !important;
 }
 
-.show{
-  visibility: visible !important; 
+.show {
+  visibility: visible !important;
 }

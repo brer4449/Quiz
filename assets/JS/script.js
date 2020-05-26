@@ -1,18 +1,20 @@
-const firstcard = document.getElementById("firstcard");
+const disableHS = document.getElementById("disable-hs");
+const disableEnd = document.getElementById("disable-end");
+const firstCard = document.getElementById("first-card");
 const mainCard = document.getElementById("card1");
-const mainBody = document.getElementById("cardtext");
-const emptyDiv = document.getElementById("emptydiv");
+const mainBody = document.getElementById("card-text");
+const emptyDiv = document.getElementById("empty-div");
 const timer = document.getElementById("timer");
 const startBtn = document.getElementById("btn1");
 const card2 = document.getElementById("card2");
-const currentScore = document.getElementById("currentscore");
+const currentScore = document.getElementById("current-score");
 const userName = document.getElementById("username");
 const addBtn = document.getElementById("add");
-const scorelist = document.getElementById("scorelist");
-const highscoresBtn = document.getElementById("highscores");
+const scoreList = document.getElementById("score-list");
+const highScoresBtn = document.getElementById("high-scores");
 const finishBtn = document.getElementById("done");
-const endofgame = document.getElementById("endofgamecontent");
-const displayscore = document.getElementById("displayscore");
+const endOfGame = document.getElementById("end-of-game-content");
+const displayScore = document.getElementById("display-score");
 let score = 0;
 let secondsLeft = 75;
 let index = 0;
@@ -45,8 +47,8 @@ function sendMessage() {
 startBtn.addEventListener("click", startQuiz);
 
 function startQuiz() {
-  finishBtn.disabled = false;
-  highscoresBtn.disabled = false;
+  disableHS.classList.remove("disable-links");
+  disableEnd.classList.remove("disable-links");
   setTime();
   displayQuestion();
 }
@@ -111,15 +113,15 @@ function logScore() {
   userNameArray.push(name);
   localStorage.setItem("username_array", JSON.stringify(userNameArray));
   pTag.textContent = name;
-  scorelist.appendChild(pTag);
+  scoreList.appendChild(pTag);
 }
 
-highscoresBtn.addEventListener("click", showScores);
+highScoresBtn.addEventListener("click", showScores);
 
 //Function that displays high score screen
 function showScores() {
   clearInterval(timerInterval);
-  firstcard.setAttribute("class", "hide");
+  firstCard.setAttribute("class", "hide");
   card2.setAttribute("class", "show text-center");
   let userNameArray = JSON.parse(localStorage.getItem("username_array"));
   if (!userNameArray) {
@@ -140,7 +142,7 @@ function showScores() {
   for (let i = 0; i < sortedUserArray.length; i++) {
     let pTag = document.createElement("p");
     pTag.textContent = sortedUserArray[i].join(": ");
-    scorelist.appendChild(pTag);
+    scoreList.appendChild(pTag);
   }
   setBlank();
 }
@@ -160,6 +162,6 @@ function endContent() {
     score += 5;
   }
   clearInterval(timerInterval);
-  endofgame.setAttribute("class", "show");
-  displayscore.textContent = `Your score: ${score}`;
+  endOfGame.setAttribute("class", "show");
+  displayScore.textContent = `Your score: ${score}`;
 }
