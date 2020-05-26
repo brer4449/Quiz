@@ -1,7 +1,6 @@
 const firstcard = document.getElementById("firstcard");
 const mainCard = document.getElementById("card1");
 const mainBody = document.getElementById("cardtext");
-const startoverBtn = document.getElementById("startover");
 const emptyDiv = document.getElementById("emptydiv");
 const timer = document.getElementById("timer");
 const startBtn = document.getElementById("btn1");
