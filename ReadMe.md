@@ -10,16 +10,7 @@ This project is a simple quiz! It showcases use of bootstrap, local storage, loo
 
 ## Functionality
 
-Landing page
-![Landing page](https://github.com/brer4449/homework4APIs/blob/master/assets/images/quiz1.png)
-Demonstration of wrong answer
-![Demonstration of wrong answer](https://github.com/brer4449/homework4APIs/blob/master/assets/images/quiz2.png)
-Completion of quiz
-![Completion of quiz](https://github.com/brer4449/homework4APIs/blob/master/assets/images/quiz3.png)
-Adding name to scoreboard, demo of local storage
-![Adding name to scoreboard](https://github.com/brer4449/homework4APIs/blob/master/assets/images/quiz4.png)
-Game Over page when time runs out
-![Game Over page when time runs out](https://github.com/brer4449/homework4APIs/blob/master/assets/images/quiz5.png)
+![Demonstration of working app](./assets/images/js_quiz.gif)
 
 ## Technologies
 
