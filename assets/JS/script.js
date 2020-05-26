@@ -1,19 +1,19 @@
-let firstcard = document.getElementById("firstcard");
-let mainCard = document.getElementById("card1");
-let mainBody = document.getElementById("cardtext");
-let startoverBtn = document.getElementById("startover");
-let emptyDiv = document.getElementById("emptydiv");
-let timer = document.getElementById("timer");
-let startBtn = document.getElementById("btn1");
-let highscoresBtn = document.getElementById("highscores");
-let card2 = document.getElementById("card2");
-let currentScore = document.getElementById("currentscore");
-let userName = document.getElementById("username");
-let addBtn = document.getElementById("add");
-let scorelist = document.getElementById("scorelist");
-let finishBtn = document.getElementById("done");
-let endofgame = document.getElementById("endofgamecontent");
-let displayscore = document.getElementById("displayscore");
+const firstcard = document.getElementById("firstcard");
+const mainCard = document.getElementById("card1");
+const mainBody = document.getElementById("cardtext");
+const startoverBtn = document.getElementById("startover");
+const emptyDiv = document.getElementById("emptydiv");
+const timer = document.getElementById("timer");
+const startBtn = document.getElementById("btn1");
+const highscoresBtn = document.getElementById("highscores");
+const card2 = document.getElementById("card2");
+const currentScore = document.getElementById("currentscore");
+const userName = document.getElementById("username");
+const addBtn = document.getElementById("add");
+const scorelist = document.getElementById("scorelist");
+const finishBtn = document.getElementById("done");
+const endofgame = document.getElementById("endofgamecontent");
+const displayscore = document.getElementById("displayscore");
 let score = 0;
 let secondsLeft = 75;
 let index = 0;
@@ -24,7 +24,7 @@ let timerInterval;
 
 //Sets the timer (inside of the start button click event)
 function setTime() {
-  timerInterval = setInterval(function() {
+  timerInterval = setInterval(function () {
     secondsLeft--;
     timer.textContent = `Time: ${secondsLeft}`;
     if (secondsLeft === 0) {
@@ -64,25 +64,31 @@ function displayQuestion() {
   let currentQuestion = questions[index].title;
   mainCard.textContent = currentQuestion;
   currentChoices.textContent = " ";
-  questions[index].choices.forEach(function(choice, i) {
+  questions[index].choices.forEach(function (choice, i) {
     let newBtn = document.createElement("button");
     newBtn.setAttribute("class", "choice btn btn-primary btn-sm");
     newBtn.setAttribute("style", "margin-right: 5px");
     newBtn.setAttribute("value", choice);
     newBtn.textContent = `${i + 1}. ${choice}`;
-    newBtn.addEventListener("click", updateScore);
+    newBtn.addEventListener("click", nextQuestion);
     mainBody.appendChild(newBtn);
   });
-  let nextBtn = document.createElement("button");
-  nextBtn.setAttribute("class", "btn btn-primary");
-  nextBtn.setAttribute("style", "display: inline-block");
-  nextBtn.textContent = "Next";
-  emptyDiv.appendChild(nextBtn);
-  nextBtn.addEventListener("click", nextQuestion);
 }
 
-//Function that increments index and calls the displayQuestion function to show us the next Q
-function nextQuestion() {
+//Function that increments index and calls the displayQuestion function to show us the next Q and updates score
+function nextQuestion(event) {
+  event.preventDefault();
+  if (event.target.value === questions[index].answer) {
+    score += 10;
+    currentScore.textContent = `Score: ${score}`;
+    // emptyDiv.textContent = "";
+    emptyDiv.textContent = "Correct!";
+  } else {
+    score -= 5;
+    currentScore.textContent = `Score: ${score}`;
+    // emptyDiv.textContent = "";
+    emptyDiv.textContent = "Incorrect!";
+  }
   index++;
   displayQuestion();
 }
@@ -120,25 +126,6 @@ function showScores() {
     scorelist.appendChild(pTag);
   }
   setBlank();
-}
-
-//Function that keeps track of score
-function updateScore(event) {
-  event.preventDefault();
-  if (event.target.value === questions[index].answer) {
-    score += 10;
-    currentScore.textContent = `Score: ${score}`;
-    let correct = document.createElement("p");
-    correct.textContent = "Correct!";
-    emptyDiv.appendChild(correct);
-  } else {
-    score -= 5;
-    currentScore.textContent = `Score: ${score}`;
-    let incorrect = document.createElement("p");
-    incorrect.textContent = " ";
-    incorrect.textContent = "Incorrect, try again!";
-    emptyDiv.appendChild(incorrect);
-  }
 }
 
 //Button that ends quiz
