@@ -4,12 +4,12 @@ const mainBody = document.getElementById("cardtext");
 const emptyDiv = document.getElementById("emptydiv");
 const timer = document.getElementById("timer");
 const startBtn = document.getElementById("btn1");
-const highscoresBtn = document.getElementById("highscores");
 const card2 = document.getElementById("card2");
 const currentScore = document.getElementById("currentscore");
 const userName = document.getElementById("username");
 const addBtn = document.getElementById("add");
 const scorelist = document.getElementById("scorelist");
+const highscoresBtn = document.getElementById("highscores");
 const finishBtn = document.getElementById("done");
 const endofgame = document.getElementById("endofgamecontent");
 const displayscore = document.getElementById("displayscore");
@@ -45,6 +45,8 @@ function sendMessage() {
 startBtn.addEventListener("click", startQuiz);
 
 function startQuiz() {
+  finishBtn.disabled = false;
+  highscoresBtn.disabled = false;
   setTime();
   displayQuestion();
 }
@@ -53,11 +55,10 @@ function startQuiz() {
 function setBlank() {
   mainCard.textContent = " ";
   mainBody.textContent = " ";
-  emptyDiv.textContent = " ";
   startBtn.remove();
 }
 
-//Shows the next question, creates the answer buttons, removes start button
+//Shows the next question, creates the answer buttons
 function displayQuestion() {
   setBlank();
   let currentQuestion = questions[index].title;
@@ -77,16 +78,21 @@ function displayQuestion() {
 //Function that increments index and calls the displayQuestion function to show us the next Q and updates score
 function nextQuestion(event) {
   event.preventDefault();
+  let clearMessage = function () {
+    setInterval(function () {
+      emptyDiv.textContent = "";
+    }, 1500);
+  };
   if (event.target.value === questions[index].answer) {
     score += 10;
     currentScore.textContent = `Current Score: ${score}`;
-    // emptyDiv.textContent = "";
     emptyDiv.textContent = "Correct!";
+    clearMessage();
   } else {
     score -= 5;
     currentScore.textContent = `Current Score: ${score}`;
-    // emptyDiv.textContent = "";
     emptyDiv.textContent = "Incorrect!";
+    clearMessage();
   }
   index++;
   displayQuestion();
@@ -95,21 +101,22 @@ function nextQuestion(event) {
 addBtn.addEventListener("click", logScore);
 
 function logScore() {
-  let finalscore = currentScore.textContent;
+  let finalscore = score;
   let pTag = document.createElement("p");
-  let name = userName.value + finalscore;
+  let name = `${userName.value}: ${finalscore}`;
   let userNameArray = JSON.parse(localStorage.getItem("username_array"));
   if (!userNameArray) {
     userNameArray = [];
   }
   userNameArray.push(name);
   localStorage.setItem("username_array", JSON.stringify(userNameArray));
-  pTag.innerHTML = name;
+  pTag.textContent = name;
   scorelist.appendChild(pTag);
 }
 
 highscoresBtn.addEventListener("click", showScores);
-//Function that displays highscore screen
+
+//Function that displays high score screen
 function showScores() {
   clearInterval(timerInterval);
   firstcard.setAttribute("class", "hide");
@@ -118,17 +125,28 @@ function showScores() {
   if (!userNameArray) {
     userNameArray = [];
   }
+  let sortedUserArray = [];
+  // split LS array and reversed it to create new array of arrays
   for (let i = 0; i < userNameArray.length; i++) {
+    let newEl = userNameArray[i].split(": ").reverse();
+    sortedUserArray.push(newEl);
+  }
+  // Sorted the array by number and then in descending order
+  sortedUserArray.sort().reverse();
+  for (let i = 0; i < sortedUserArray.length; i++) {
+    // Swapped position of each nested array ie. ["80", "BJE"] => ["BJE", "80"] and then joined them
+    sortedUserArray[i].reverse().join();
+  }
+  for (let i = 0; i < sortedUserArray.length; i++) {
     let pTag = document.createElement("p");
-    pTag.textContent = userNameArray[i];
-    console.log(userNameArray);
+    pTag.textContent = sortedUserArray[i].join(": ");
     scorelist.appendChild(pTag);
   }
   setBlank();
 }
 
-//Button that ends quiz
 finishBtn.addEventListener("click", endContent);
+
 //Function that reveals end of quiz content
 function endContent() {
   setBlank();
@@ -141,7 +159,6 @@ function endContent() {
   } else {
     score += 5;
   }
-  console.log(score);
   clearInterval(timerInterval);
   endofgame.setAttribute("class", "show");
   displayscore.textContent = `Your score: ${score}`;
