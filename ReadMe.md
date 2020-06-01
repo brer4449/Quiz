@@ -15,3 +15,5 @@ This project is a simple quiz! It showcases use of bootstrap, local storage, loo
 ## Technologies
 
 Vanilla JS & Bootstrap version 4
+
+test
